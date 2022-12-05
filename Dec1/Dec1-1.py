@@ -1,4 +1,4 @@
-
+print(test)
 with open('AdventOfCode/Dec1/input.txt', 'r') as input:
     sum = 0
     calories = 0
