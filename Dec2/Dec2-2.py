@@ -3,7 +3,7 @@ draw = 3
 loss = 0
 points = 0
 
-with open('AdventOfCode/Dec2/input.txt') as input:
+with open('Dec2/input.txt') as input:
     for line in input:
         score = 0
         line = line.strip().split(' ')
