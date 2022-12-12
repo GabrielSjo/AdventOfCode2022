@@ -4,11 +4,8 @@ def init_stacks():
             if line.startswith(" 1"):
                 line = line.strip("\n")
                 stackIndexes = [character for character in line]
-                stacks = [[]]*int(line.strip(" ")[-1])
-                print(stacks)
-                print(stackIndexes)
+                stacks = [[] for _ in range(int(line.strip(" ")[-1]))]
                 break
-    input.close()
     return stackIndexes, stacks
 def fill_stacks(stackIndexes, stacks):
     with open('Dec5/exinput.txt') as input:
@@ -19,7 +16,32 @@ def fill_stacks(stackIndexes, stacks):
                 for i, character in enumerate(line):
                     if character.isalpha():
                         i = int(stackIndexes[i])-1
-                        stacks[0][i].append(character)
-    input.close()
+                        stacks[i].append(character)
+    return stacks
+def move_boxes(stacks):
+    moves = []
+    with open('Dec5/exinput.txt') as input:
+        for line in input:
+            line = line.strip("\n")
+            if line.startswith("move"):
+                for idx, word in enumerate(line.split()):
+                    if word.isnumeric() and idx != len(line.split()):
+                        moves.append(word)
+                print(moves)
+                for k in range(0, int(moves[0])):
+                    stacks[int(moves[2])-1].insert(0, stacks[int(moves[1])-1][0])
+                    del stacks[int(moves[1])-1][0]
+                moves = []
+                print(stacks)
+        return stacks
 stackIndexes, stacks = init_stacks()
 stacks = fill_stacks(stackIndexes, stacks)
+stacks = move_boxes(stacks)
+ans = ""
+for k in range(len(stacks)):
+    ans = ans + stacks[k][0]
+print(ans)
+    
+
+
+
